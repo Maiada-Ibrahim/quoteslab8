@@ -3,12 +3,45 @@
  */
 package quoteslab8;
 
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test
+    void testJson()  {
+
+        Gson gson = new Gson();
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(Paths.get("C:\\Users\\STUDENT\\project\\quoteslab8\\app\\src\\test\\resources\\data.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedReader read = new BufferedReader(reader);
+        Quotes[] convert = gson.fromJson(read, Quotes[].class);
+        assertFalse(convert.length == 0);
+//        Random random = new Random();
+//        int radnomQuote = (int)(Math.random()*(convert.length-1));
+//        String ex= "Name of Author: "+convert[radnomQuote].getAuthor();
+//        assertEquals(ex,App convert[radnomQuote].toString());
+////        System.out.println("Name of Author: "+convert[radnomQuote].getAuthor());
+////        System.out.println("The Quote : " + convert[radnomQuote].getText());
+
+
+
+
     }
+
+
+    }
+
 }
